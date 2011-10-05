@@ -42,12 +42,17 @@ function create_post_type() {
 
 function mte_display_actions() {
     global $wp_actions;
-    print_r( $wp_actions);
+    print_r( $wp_actions );
 }
 
 function mte_display_filter() {
     global $wp_filter;
-    print_r( $wp_filter);
+    print_r( $wp_filter );
+}
+
+function mte_display_current_filter() {
+    global $wp_current_filter;
+    print_r( $wp_current_filter );
 }
 
 ?>
