@@ -44,6 +44,6 @@ function mte_display_actions() {
     global $wp_actions;
     print_r( $wp_actions);
 }
-add_action( 'wp_head', 'mt_display_ations' );
+add_action( 'wp_foot', 'mt_display_ations' );
 
 ?>
