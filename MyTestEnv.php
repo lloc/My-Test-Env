@@ -25,8 +25,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//add_action( 'all', create_function( '', 'var_dump( current_filter() );' ) );
-
 add_action( 'init', 'create_post_type' );
 function create_post_type() {
 	register_post_type( 'acme_product',
@@ -41,5 +39,11 @@ function create_post_type() {
 		)
 	);
 }
+
+function mte_display_actions() {
+    global $wp_actions;
+    print_r( $wp_actions);
+}
+add_action( 'wp_head', 'mt_display_ations' );
 
 ?>
