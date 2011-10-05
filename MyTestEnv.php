@@ -25,7 +25,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-add_action( 'all', create_function( '', 'var_dump( current_filter() );' ) );
+//add_action( 'all', create_function( '', 'var_dump( current_filter() );' ) );
 
 add_action( 'init', 'create_post_type' );
 function create_post_type() {
