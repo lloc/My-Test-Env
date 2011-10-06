@@ -43,7 +43,7 @@ function create_post_type() {
 function my_msls_blog_collection_get( $objects ) {
     $objects = array();
     $blogs   = array( 1 => 'Override English', 2 => 'Override Deutsch');
-    foreach ( $arr as $id => $description ) {
+    foreach ( $blogs as $id => $description ) {
         $details = get_blog_details( $id );
         if ( is_object( $details ) ) {
             $objects[$id] = new MslsBlog( $details, $description );
