@@ -40,6 +40,19 @@ function create_post_type() {
 	);
 }
 
+function my_msls_blog_collection_get( $objects ) {
+    $objects = array();
+    $blogs   = array( 1 => 'Override English', 2 => 'Override Deutsch');
+    foreach ( $arr as $id => $description ) {
+        $details = get_blog_details( $id );
+        if ( is_object( $details ) ) {
+            $objects[$id] = new MslsBlog( $details, $description );
+        }
+    }
+    return $objects;
+}
+add_filter( 'msls_blog_collection_get', 'my_msls_blog_collection_get' );
+
 function mte_display_actions() {
     global $wp_actions;
     print_r( $wp_actions );
