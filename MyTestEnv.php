@@ -51,7 +51,7 @@ function my_msls_blog_collection_get( $objects ) {
     }
     return $objects;
 }
-add_filter( 'msls_blog_collection_get', 'my_msls_blog_collection_get' );
+//add_filter( 'msls_blog_collection_get', 'my_msls_blog_collection_get' );
 
 function mte_display_actions() {
     global $wp_actions;
