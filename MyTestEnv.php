@@ -44,7 +44,7 @@ add_action( 'init', 'create_post_type' );
 function build_taxonomies() {  
     register_taxonomy( 
         'operating_system', 
-        'post', 
+        'acme_product', 
         array( 
             'hierarchical' => true, 
             'label' => 'Operating System', 
