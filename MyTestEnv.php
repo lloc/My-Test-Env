@@ -31,28 +31,35 @@ function create_post_type() {
         array(
             'labels' => array(
                 'name' => __( 'Products' ),
-                'singular_name' => __( 'Product' )
+                'singular_name' => __( 'Product' ),
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array('slug' => 'products')
+            'rewrite' => array( 'slug' => 'products' ),
         )
-	);
+    );
 }
 add_action( 'init', 'create_post_type' );
 
 function build_taxonomies() {  
-    register_taxonomy( 
-        'operating_system', 
-        'acme_product', 
-        array( 
-            'hierarchical' => true, 
-            'label' => 'Operating System', 
-            'query_var' => true, 
-            'rewrite' => true 
-        ) 
+    register_taxonomy(
+        'operating_system',
+        'acme_product',
+        array(
+            'hierarchical' => true,
+            'label' => 'Operating System',
+            'query_var' => true,
+            'rewrite' => true,
+        )
     );
 }
 add_action( 'init', 'build_taxonomies', 0 );  
+
+function my_get_posts( $query ) {
+	if ( is_home() )
+		$query->set( 'post_type', array( 'post', 'acme_product' ) );
+	return $query;
+}
+add_filter( 'pre_get_posts', 'my_get_posts' );
 
 ?>
