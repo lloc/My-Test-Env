@@ -56,10 +56,23 @@ function build_taxonomies() {
 add_action( 'init', 'build_taxonomies', 0 );  
 
 function my_get_posts( $query ) {
-	if ( is_home() )
-		$query->set( 'post_type', array( 'post', 'acme_product' ) );
-	return $query;
+    if ( is_home() )
+        $query->set( 'post_type', array( 'post', 'acme_product' ) );
+    return $query;
 }
 add_filter( 'pre_get_posts', 'my_get_posts' );
+
+function my_msls_blog_collection_get( $objects ) {
+    $objects = array();
+    $blogs   = array( 1 => 'Override English', 2 => 'Override Deutsch', );
+    foreach ( $blogs as $id => $description ) {
+        $details = get_blog_details( $id );
+        if ( is_object( $details ) ) {
+            $objects[$id] = new MslsBlog( $details, $description );
+        }
+    }
+    return $objects;
+}
+add_filter( 'msls_blog_collection_construct', 'my_msls_blog_collection_get' );
 
 ?>
