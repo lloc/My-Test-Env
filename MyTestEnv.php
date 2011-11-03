@@ -70,7 +70,6 @@ function my_get_category_id( $id ) {
             switch_to_blog( BLOG_ID_CURRENT_SITE );
             $mydata = new MslsCategoryOptions( $id );
             $id = $mydata->__get( $language );
-            print_r( $mydata );
             restore_current_blog();
         }
     }
@@ -78,7 +77,7 @@ function my_get_category_id( $id ) {
 }
 
 function my_get_category_id_test() {
-    echo 'MyGetCategoryIdTest: ' . my_get_category_id( 1 );
+    echo 'MyGetCategoryIdTest: Request => 4, Result => ' . my_get_category_id( 4 );
 }
 add_action( 'wp_footer', 'my_get_category_id_test' );
 
