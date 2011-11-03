@@ -68,7 +68,7 @@ function my_get_category_id( $id ) {
         if ( $blogs->get_current_blog_id() != BLOG_ID_CURRENT_SITE ) {
             $language = $blogs->get_current_blog()->get_language();
             switch_to_blog( BLOG_ID_CURRENT_SITE );
-            $mydata = MslsCategoryOptions( $id );
+            $mydata = new MslsCategoryOptions( $id );
             $id = $mydata->__get( $language );
             restore_current_blog();
         }
