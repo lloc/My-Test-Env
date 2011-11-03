@@ -77,7 +77,7 @@ function my_get_category_id( $id ) {
 }
 
 function my_get_category_id_test() {
-    echo 'MyGetCategoryIdTest: ' . my_get_category_id();
+    echo 'MyGetCategoryIdTest: ' . my_get_category_id( 1 );
 }
 add_action( 'wp_footer', 'my_get_category_id_test' );
 
