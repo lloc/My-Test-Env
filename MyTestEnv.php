@@ -62,23 +62,9 @@ function my_get_posts( $query ) {
 }
 add_filter( 'pre_get_posts', 'my_get_posts' );
 
-function my_get_category_id( $id ) {
-    if ( class_exists( 'MslsBlogCollection' ) ) {
-        $blogs = MslsBlogCollection::instance();
-        if ( $blogs->get_current_blog_id() != BLOG_ID_CURRENT_SITE ) {
-            $language = $blogs->get_current_blog()->get_language();
-            switch_to_blog( BLOG_ID_CURRENT_SITE );
-            $mydata = new MslsCategoryOptions( $id );
-            $id = $mydata->__get( $language );
-            restore_current_blog();
-        }
-    }
-    return $id;
+function my_install_plugin() {
+    flush_rewrite_rules();
 }
-
-function my_get_category_id_test() {
-    echo 'MyGetCategoryIdTest: Request => 4, Result => ' . my_get_category_id( 4 );
-}
-add_action( 'wp_footer', 'my_get_category_id_test' );
+register_activation_hook( __FILE__, 'my_install_plugin' );
 
 ?>
