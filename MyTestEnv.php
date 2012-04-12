@@ -3,7 +3,7 @@
 /*
 Plugin Name: My Test Env
 Description: Prepares my test environment
-Version: 0.1a
+Version: 0.2
 Author: Dennis Ploetner 
 Author URI: http://lloc.de/
 */
@@ -25,6 +25,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+define( 'MY_TEST_ENV_VERSION', 0.2 );
+
 function my_create_post_type() {
     register_post_type(
         'acme_product',
@@ -39,7 +41,7 @@ function my_create_post_type() {
         )
     );
 }
-add_action( 'init', 'my_create_post_type' );
+add_action( 'init', 'my_create_post_type', 10, 0 );
 
 function my_build_taxonomies() {  
     register_taxonomy(
@@ -53,7 +55,15 @@ function my_build_taxonomies() {
         )
     );
 }
-add_action( 'init', 'my_build_taxonomies', 0 );  
+add_action( 'init', 'my_build_taxonomies', 10, 0 );
+
+function my_refresh_plugin() {
+    if ( MY_TEST_ENV_VERSION != get_option( 'MY_TEST_ENV_VERSION' ) ) {
+        update_option( 'MY_TEST_ENV_VERSION', MY_TEST_ENV_VERSION );
+        flush_rewrite_rules( false );
+    }
+}
+add_action( 'init', 'my_refresh_plugin', 11, 0 );  
 
 function my_get_posts( $query ) {
     if ( is_home() )
@@ -61,10 +71,5 @@ function my_get_posts( $query ) {
     return $query;
 }
 add_filter( 'pre_get_posts', 'my_get_posts' );
-
-function my_install_plugin() {
-    flush_rewrite_rules();
-}
-register_activation_hook( __FILE__, 'my_install_plugin' );
 
 ?>
