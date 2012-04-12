@@ -25,7 +25,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function create_post_type() {
+function my_create_post_type() {
     register_post_type(
         'acme_product',
         array(
@@ -39,21 +39,21 @@ function create_post_type() {
         )
     );
 }
-add_action( 'init', 'create_post_type' );
+add_action( 'init', 'my_create_post_type' );
 
-function build_taxonomies() {  
+function my_build_taxonomies() {  
     register_taxonomy(
         'operating_system',
         'acme_product',
         array(
             'hierarchical' => true,
-            'label' => 'Operating System',
+            'label' => __( 'Operating System' ),
             'query_var' => true,
             'rewrite' => true,
         )
     );
 }
-add_action( 'init', 'build_taxonomies', 0 );  
+add_action( 'init', 'my_build_taxonomies', 0 );  
 
 function my_get_posts( $query ) {
     if ( is_home() )
