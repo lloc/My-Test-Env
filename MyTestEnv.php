@@ -38,7 +38,7 @@ function my_create_post_type() {
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array( 'slug' => __( 'products', 'my_test_env' ) ),
+            'rewrite' => array( 'slug' => 'products' ),
         )
     );
 }
