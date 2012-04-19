@@ -3,7 +3,7 @@
 /*
 Plugin Name: My Test Env
 Description: Prepares my test environment
-Version: 0.2
+Version: 0.3
 Author: Dennis Ploetner 
 Author URI: http://lloc.de/
 */
@@ -25,19 +25,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-define( 'MY_TEST_ENV_VERSION', 0.2 );
+define( 'MY_TEST_ENV_VERSION', 0.3 );
 
 function my_create_post_type() {
+    load_plugin_textdomain( 'my_test_env', false, basename( dirname( __FILE__ ) ) );
     register_post_type(
         'acme_product',
         array(
             'labels' => array(
-                'name' => __( 'Products' ),
-                'singular_name' => __( 'Product' ),
+                'name' => __( 'Products', 'my_test_env' ),
+                'singular_name' => __( 'Product', 'my_test_env' ),
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array( 'slug' => 'products' ),
+            'rewrite' => array( 'slug' => __( 'products', 'my_test_env' ) ),
         )
     );
 }
@@ -49,7 +50,7 @@ function my_build_taxonomies() {
         'acme_product',
         array(
             'hierarchical' => true,
-            'label' => __( 'Operating System' ),
+            'label' => __( 'Operating System', 'my_test_env' ),
             'query_var' => true,
             'rewrite' => true,
         )
@@ -63,7 +64,7 @@ function my_refresh_plugin() {
         flush_rewrite_rules( false );
     }
 }
-add_action( 'init', 'my_refresh_plugin', 11, 0 );  
+add_action( 'init', 'my_refresh_plugin', 11, 0 );
 
 function my_get_posts( $query ) {
     if ( is_home() )
