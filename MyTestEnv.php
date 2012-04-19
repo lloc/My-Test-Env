@@ -3,7 +3,7 @@
 /*
 Plugin Name: My Test Env
 Description: Prepares my test environment
-Version: 0.3
+Version: 0.4
 Author: Dennis Ploetner 
 Author URI: http://lloc.de/
 */
@@ -25,7 +25,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-define( 'MY_TEST_ENV_VERSION', 0.3 );
+define( 'MY_TEST_ENV_VERSION', 0.4 );
 
 function my_create_post_type() {
     load_plugin_textdomain( 'my_test_env', false, basename( dirname( __FILE__ ) ) );
