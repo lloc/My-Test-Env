@@ -74,8 +74,14 @@ function my_get_posts( $query ) {
 add_filter( 'pre_get_posts', 'my_get_posts' );
 
 function my_custom_menu_item( $items, $args ) {
-    if ( 'primary' == $args->theme_location ) {
-        $items .= get_the_msls();
+    if ( class_exists( 'MslsOutput' ) && 'primary' == $args->theme_location ) {
+        /**
+         * 2 because we want just a linked icon (look at MslsLink::get_types())
+         */
+        $arr = $this->get( 2 );
+        foreach ( $arr as $item ) {
+            $items .= '<li>' . $item . '</li>';
+        }
     }
     return $items;
 }
