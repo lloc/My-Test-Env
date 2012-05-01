@@ -81,7 +81,7 @@ function my_custom_menu_item( $items, $args ) {
          */
         $arr = $obj->get( 2 );
         if ( !empty( $arr ) ) {
-            $items .= '<li>' . implode( '&nbsp;', $arr ) . '</li>';
+            $items .= '<li>' . implode( '</li><li>', $arr ) . '</li>';
         }
     }
     return $items;
