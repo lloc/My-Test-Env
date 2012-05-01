@@ -80,8 +80,8 @@ function my_custom_menu_item( $items, $args ) {
          * 2 because we want just a linked icon (look at MslsLink::get_types())
          */
         $arr = $obj->get( 2 );
-        foreach ( $arr as $item ) {
-            $items .= '<li>' . $item . '</li>';
+        if ( !empty( $arr ) ) {
+            $items .= '<li>' . implode( '&nbsp;', $arr ) . '</li>';
         }
     }
     return $items;
