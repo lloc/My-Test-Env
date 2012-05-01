@@ -75,10 +75,11 @@ add_filter( 'pre_get_posts', 'my_get_posts' );
 
 function my_custom_menu_item( $items, $args ) {
     if ( class_exists( 'MslsOutput' ) && 'primary' == $args->theme_location ) {
+        $obj = new MslsOutput;
         /**
          * 2 because we want just a linked icon (look at MslsLink::get_types())
          */
-        $arr = $this->get( 2 );
+        $arr = $obj->get( 2 );
         foreach ( $arr as $item ) {
             $items .= '<li>' . $item . '</li>';
         }
