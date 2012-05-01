@@ -74,7 +74,7 @@ function my_get_posts( $query ) {
 add_filter( 'pre_get_posts', 'my_get_posts' );
 
 function my_custom_menu_item( $items, $args ) {
-    print_r( $args );
+    print_r( $args->theme_location );
     if ( function_exists( 'get_the_msls' ) && $args->theme_location == 'primary' ) {
         $items .= '<li>' . get_the_msls() . '</li>';
     }
