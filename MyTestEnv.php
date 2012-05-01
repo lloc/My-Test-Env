@@ -74,10 +74,7 @@ function my_get_posts( $query ) {
 add_filter( 'pre_get_posts', 'my_get_posts' );
 
 function my_custom_menu_item( $items, $args ) {
-    if ( 'primary' == $args->theme_location ) {
-        $items .= '<li>' . get_the_msls() . '</li>';
-    }
-    return $items;
+    return $items .= '<li>' . get_the_msls() . '</li>';
 }
 add_filter( 'wp_nav_menu_items', 'my_custom_menu_item', 10, 2 );
 
