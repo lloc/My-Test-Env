@@ -89,9 +89,9 @@ function my_custom_menu_item( $items, $args ) {
 add_filter( 'wp_nav_menu_items', 'my_custom_menu_item', 10, 2 );
 
 function my_print_something() {
-	$blogs  = MslsBlogCollection::instance()->get_objects();
+	$blogs  = MslsBlogCollection::instance();
 	$mydata = MslsOptions::create();
-	foreach ( $blogs as $blog ) {
+	foreach ( $blogs->get_objects() as $blog ) {
 		$language = $blog->get_language();
 		if ( $blog->userblog_id == $blogs->get_current_blog_id() ) {
 			$url = $mydata->get_current_link();
