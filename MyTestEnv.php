@@ -105,9 +105,10 @@ function my_print_something() {
 			$url = $mydata->get_permalink( $language );
 			restore_current_blog();
 		}
+		$language = substr( $language, 0, 2 );
 		printf(
 			'<link rel="alternate" hreflang="%s" href="%s" />',
-			substr( $language, 0, 2 ),
+			( 'us' == $language ? 'en' : $language ),
 			$url
 		);
 	}
