@@ -101,14 +101,14 @@ function my_print_something() {
 			if ( 'MslsOptions' != get_class( $mydata ) && !$mydata->has_value( $language ) ) {
 				restore_current_blog();
 				continue;
+			}
+			$url = $mydata->get_permalink( $language );
+			restore_current_blog();
+			printf(
+				'<link rel="alternate" hreflang="%s" href="%s" />',
+				substr( $language, 0, 2 ),
+				$url
+			);
 		}
-		$url = $mydata->get_permalink( $language );
-		restore_current_blog();
-		printf(
-			'<link rel="alternate" hreflang="%s" href="%s" />',
-			substr( $language, 0, 2 ),
-			$url
-		);
 	}
-}
 add_action( 'wp_head', 'my_print_something' );
