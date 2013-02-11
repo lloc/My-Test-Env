@@ -104,12 +104,12 @@ function my_print_something() {
 			}
 			$url = $mydata->get_permalink( $language );
 			restore_current_blog();
-			printf(
-				'<link rel="alternate" hreflang="%s" href="%s" />',
-				substr( $language, 0, 2 ),
-				$url
-			);
 		}
+		printf(
+			'<link rel="alternate" hreflang="%s" href="%s" />',
+			substr( $language, 0, 2 ),
+			$url
+		);
 	}
 }
 add_action( 'wp_head', 'my_print_something' );
