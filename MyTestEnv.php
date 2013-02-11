@@ -111,4 +111,5 @@ function my_print_something() {
 			);
 		}
 	}
+}
 add_action( 'wp_head', 'my_print_something' );
