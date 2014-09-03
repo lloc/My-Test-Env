@@ -25,7 +25,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-define( 'MY_TEST_ENV_VERSION', 0.4 );
+define( 'MY_TEST_ENV_VERSION', 0.5 );
 
 function my_create_post_type() {
 	load_plugin_textdomain( 'my_test_env', false, basename( dirname( __FILE__ ) ) );
@@ -38,7 +38,7 @@ function my_create_post_type() {
 			),
 			'public' => true,
 			'has_archive' => true,
-			'rewrite' => array( 'slug' => 'products' ),
+			'rewrite' => array( 'slug' => __( 'products', 'my_test_env' ) ),
 		)
 	);
 }
@@ -87,30 +87,3 @@ function my_custom_menu_item( $items, $args ) {
 	return $items;
 }
 add_filter( 'wp_nav_menu_items', 'my_custom_menu_item', 10, 2 );
-
-function my_print_something() {
-	$blogs  = MslsBlogCollection::instance();
-	$mydata = MslsOptions::create();
-	foreach ( $blogs->get_objects() as $blog ) {
-		$language = $blog->get_language();
-		if ( $blog->userblog_id == $blogs->get_current_blog_id() ) {
-			$url = $mydata->get_current_link();
-		}
-		else {
-			switch_to_blog( $blog->userblog_id );
-			if ( 'MslsOptions' != get_class( $mydata ) && !$mydata->has_value( $language ) ) {
-				restore_current_blog();
-				continue;
-			}
-			$url = $mydata->get_permalink( $language );
-			restore_current_blog();
-		}
-		$language = substr( $language, 0, 2 );
-		printf(
-			'<link rel="alternate" hreflang="%s" href="%s" />',
-			( 'us' == $language ? 'en' : $language ),
-			$url
-		);
-	}
-}
-add_action( 'wp_head', 'my_print_something' );
