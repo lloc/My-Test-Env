@@ -67,14 +67,15 @@ function my_refresh_plugin() {
 add_action( 'init', 'my_refresh_plugin', 11, 0 );
 
 function my_get_posts( $query ) {
-	if ( is_home() )
+	if ( is_home() ) {
 		$query->set( 'post_type', array( 'post', 'acme_product' ) );
+	}
 	return $query;
 }
 add_filter( 'pre_get_posts', 'my_get_posts' );
 
 function my_custom_menu_item( $items, $args ) {
-	if ( class_exists( 'MslsOutput' ) && 'primary' == $args->theme_location ) {
+	if ( defined( 'MSLS_PLUGIN_VERSION' ) && 'primary' == $args->theme_location ) {
 		$obj = new MslsOutput;
 		/**
 		 * 2 because we want just a linked icon (look at MslsLink::get_types())
